@@ -1,0 +1,12 @@
+{
+   "predef" : [ "$",
+                "jQuery",
+                "chrome",
+                "ArticleView",
+                "ArticleParser",
+                "Util" ],
+   "browser" : true,
+   "multistr" : true,
+   "laxbreak" : true,
+   "loopfunc", true
+}

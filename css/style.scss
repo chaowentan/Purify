@@ -1,0 +1,442 @@
+
+$fontSize            : 1rem;
+$lineHeight          : $fontSize * 1.5;
+$columnGap           : $fontSize * 2;
+$scrollBarSize       : 10px;
+
+$textColor           : black;
+$viewBgColor         : #333;
+$dialogBgColor       : #f7f7f7;
+$miscBgColor         : darken( $dialogBgColor, 7% );
+$scrollBarThumbColor : #777;
+
+///////////////////////////////////////////////////////////////////////////////
+
+@mixin column-gap( $x )
+{
+           column-gap: $x;
+   -webkit-column-gap: $x;
+}
+
+@mixin column-width( $x )
+{
+           column-width: $x;
+   -webkit-column-width: $x;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+html
+{
+   font-size: 15px;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+#article_view
+{
+   display: block;
+   position: fixed;
+   z-index: 2147483647;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: $viewBgColor;
+
+   font-size: $fontSize;
+   line-height: $lineHeight;
+   color: $textColor;
+   text-align: left;
+
+   &.sans_serif
+   {
+      font-family: sans-serif;
+   }
+
+   &.serif
+   {
+      font-family: 'Droid Serif', serif;
+   }
+
+   // -------------------------------------------------------------------------
+
+   #article_view_dialog
+   {
+      display: block;
+      position: fixed;
+      background-color: $dialogBgColor;
+      padding: $columnGap;
+
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      @include column-gap( 0 );
+      @include column-width( $fontSize * 33 );
+
+      // ----------------------------------------------------------------------
+
+      &::-webkit-scrollbar
+      {
+         width: $scrollBarSize;
+         height: $scrollBarSize;
+      }
+
+      &::-webkit-scrollbar-thumb
+      {
+         background-color: $scrollBarThumbColor;
+
+         &:hover
+         {
+            background-color: darken( $scrollBarThumbColor, 10% );
+         }
+
+         &:active
+         {
+            background-color: darken( $scrollBarThumbColor, 20% );
+         }
+      }
+
+      &::-webkit-scrollbar-track
+      {
+         background-color: lighten( $scrollBarThumbColor, 20% );
+      }
+
+      // ----------------------------------------------------------------------
+
+      #article_view_menu
+      {
+         $buttonIconSize         : 16px;
+         $menuBgColor            : darken( $scrollBarThumbColor, 15% );
+         $menuBgColorHover       : darken( $menuBgColor, 15% );
+         $menuBgColorActive      : darken( $menuBgColor, 25% );
+         $menuTextColor          : white;
+         $menuTextColorSecondary : darken( $menuTextColor, 23% );
+         $dialogMargin           : 20px;
+
+         -webkit-user-select: none;
+
+         position: fixed;
+         bottom: $dialogMargin + ($scrollBarSize * 1.5);
+         right: $dialogMargin;
+
+         background-color: $menuBgColor;
+         opacity: 0.5;
+
+         &:hover
+         {
+            opacity: 0.95;
+         }
+
+         .button
+         {
+            display: block;
+            height: $buttonIconSize * 1.6;
+            width: $buttonIconSize * 2.6;
+
+            background-repeat: no-repeat;
+            background-position: center;
+
+            float: right;
+
+            &:hover
+            {
+               cursor: pointer;
+               background-color: $menuBgColorHover;
+            }
+
+            &:active
+            {
+               background-color: $menuBgColorActive;
+            }
+         }
+
+                #close_button { background-image: url( "../img/button_close_16.png" ); }
+          #left_column_button { background-image: url( "../img/button_left_column_16.png" ); }
+         #right_column_button { background-image: url( "../img/button_right_column_16.png" ); }
+          #full_screen_button { background-image: url( "../img/button_full_screen_16.png" ); }
+           #text_style_button { background-image: url( "../img/button_text_style_16.png" ); }
+
+         #text_style_menu
+         {
+            $primaryTextFontSize: 13px;
+            $secondaryTextFontSize: 12px;
+
+            font-family: Sans-serif;
+            font-size: $primaryTextFontSize;
+            line-height: $primaryTextFontSize * 2;
+            text-align: center;
+
+            position: fixed;
+            bottom: $dialogMargin + 51px;
+            right: $dialogMargin + 113px;
+            background-color: $menuBgColor;
+
+            cursor: default;
+
+            $arrowSize: 10px;
+            .down_arrow
+            {
+               width: 0;
+               height: 0;
+               border-left: $arrowSize solid transparent;
+               border-right: $arrowSize solid transparent;
+               border-top: $arrowSize solid $menuBgColor;
+
+               margin: 0 auto;
+               position: relative;
+               top: $arrowSize;
+            }
+
+            .text_style_menu_section
+            {
+               margin: $primaryTextFontSize / 2;
+
+               & > span
+               {
+                  display: inline-block;
+                  padding: 0 $primaryTextFontSize;
+                  margin-bottom: 1px;
+
+                  color: $menuTextColor;
+
+                  &.control_button:hover
+                  {
+                     cursor: pointer;
+                     background-color: $menuBgColorHover;
+                  }
+
+                  &.control_button:active
+                  {
+                     background-color: $menuBgColorActive;
+                  }
+               }
+
+               .control_label
+               {
+                  color: $menuTextColorSecondary;
+                  font-size: $secondaryTextFontSize;
+               }
+
+               &:nth-last-child(2)
+               {
+                  margin-bottom: -1 * $arrowSize + ($primaryTextFontSize / 2);
+               }
+            }
+
+            #font_family_setting
+            {
+               #sans_serif_button,
+               #serif_button
+               {
+               }
+            }
+
+            #font_size_setting
+            {
+               #current_font_size
+               {
+                  color: $menuTextColorSecondary;
+               }
+
+               #decrease_font_size_button,
+               #increase_font_size_button
+               {
+                  font-size: 17px;
+               }
+            }
+         }
+      }
+
+      // ----------------------------------------------------------------------
+
+      #article
+      {
+         // Adding the missing spacing back to the multi-column container.
+         margin-right: $columnGap;
+
+         #article_title
+         {
+            margin-bottom: $lineHeight;
+
+            h1
+            {
+               color: $textColor;
+               font-size: $fontSize * 2;
+               margin-bottom: $fontSize;
+
+               border-left: ($fontSize / 1.5) solid $textColor;
+               padding-left: $fontSize / 1.5;
+
+               *
+               {
+                  color: $textColor;
+               }
+
+               span
+               {
+                  padding-right: $fontSize;
+               }
+            }
+
+            h2
+            {
+               color: lighten( $textColor, 39% );
+               font-weight: normal;
+
+               *
+               {
+                  color: lighten( $textColor, 39% );
+                  font-weight: normal;
+               }
+            }
+         }
+
+         // #article_content
+         // {
+         //    &:after
+         //    {
+         //       content: "\25A0";  // End sign (solid square), or &#10070;
+         //       display: block;
+         //       text-align: center;
+         //    }
+         // }
+      }
+
+
+      // ----------------------------------------------------------------------
+
+      *
+      {
+         margin: 0;
+         padding: 0;
+         border: none;
+      }
+
+      a
+      {
+         color: steelblue;
+         text-decoration: none;
+
+         *
+         {
+            color: steelblue;
+         }
+      }
+
+      // ----------------------------------------------------------------------
+      // Image Style
+
+      @mixin imageStyle()
+      {
+         margin-bottom: $lineHeight;
+         padding: $fontSize;
+         background-color: $miscBgColor;
+      }
+
+      img
+      {
+         display: block;
+         margin: 0 auto;
+         max-width: 90%;
+
+         @include imageStyle();
+      }
+
+      figure
+      {
+         @include imageStyle();
+
+         img
+         {
+            max-width: 100%;
+            margin-bottom: 0;
+            padding: 0;
+            background-color: none;
+         }
+
+         figcaption
+         {
+            margin-top: $fontSize;
+         }
+      }
+
+      // ----------------------------------------------------------------------
+
+      aside
+      {
+         background-color: $miscBgColor;
+         padding: $fontSize;
+         margin-bottom: $lineHeight;
+
+         & > *:last-child
+         {
+            margin-bottom: 0;
+         }
+      }
+
+      // ----------------------------------------------------------------------
+      // Text Style
+
+      p, h1, h2, h3, h4, h5, h6
+      {
+         margin-bottom: $lineHeight;
+      }
+
+      h1
+      {
+         font-weight: bold;
+         font-size: $fontSize * 1.5;
+         line-height: $lineHeight * 1.5;
+      }
+
+      h2
+      {
+         font-size: $fontSize * 1.3;
+      }
+
+      h3
+      {
+         font-size: $fontSize * 1.1;
+      }
+
+      // ----------------------------------------------------------------------
+
+      table
+      {
+         $borderColor: $miscBgColor;
+         border-collapse: collapse;
+         border: 1px solid $borderColor;
+         margin: $lineHeight auto;
+
+         th
+         {
+            border: 1px solid $borderColor;
+            padding: $fontSize / 2;
+
+            & > td
+            {
+               padding: 0;
+            }
+         }
+
+         td
+         {
+            border: 1px solid $borderColor;
+            padding: $fontSize / 2;
+         }
+      }
+
+      // ----------------------------------------------------------------------
+
+      ul, ol
+      {
+         margin-bottom: $fontSize;
+      }
+
+      // ----------------------------------------------------------------------
+   }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////

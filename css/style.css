@@ -1,0 +1,191 @@
+html {
+  font-size: 15px; }
+
+#article_view {
+  display: block;
+  position: fixed;
+  z-index: 2147483647;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333333;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: black;
+  text-align: left; }
+  #article_view.sans_serif {
+    font-family: sans-serif; }
+  #article_view.serif {
+    font-family: 'Droid Serif', serif; }
+  #article_view #article_view_dialog {
+    display: block;
+    position: fixed;
+    background-color: #f7f7f7;
+    padding: 2rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    column-gap: 0;
+    -webkit-column-gap: 0;
+    column-width: 33rem;
+    -webkit-column-width: 33rem; }
+    #article_view #article_view_dialog::-webkit-scrollbar {
+      width: 10px;
+      height: 10px; }
+    #article_view #article_view_dialog::-webkit-scrollbar-thumb {
+      background-color: #777777; }
+      #article_view #article_view_dialog::-webkit-scrollbar-thumb:hover {
+        background-color: #5e5e5e; }
+      #article_view #article_view_dialog::-webkit-scrollbar-thumb:active {
+        background-color: #444444; }
+    #article_view #article_view_dialog::-webkit-scrollbar-track {
+      background-color: #aaaaaa; }
+    #article_view #article_view_dialog #article_view_menu {
+      -webkit-user-select: none;
+      position: fixed;
+      bottom: 35px;
+      right: 20px;
+      background-color: #515151;
+      opacity: 0.5; }
+      #article_view #article_view_dialog #article_view_menu:hover {
+        opacity: 0.95; }
+      #article_view #article_view_dialog #article_view_menu .button {
+        display: block;
+        height: 25.6px;
+        width: 41.6px;
+        background-repeat: no-repeat;
+        background-position: center;
+        float: right; }
+        #article_view #article_view_dialog #article_view_menu .button:hover {
+          cursor: pointer;
+          background-color: #2a2a2a; }
+        #article_view #article_view_dialog #article_view_menu .button:active {
+          background-color: #111111; }
+      #article_view #article_view_dialog #article_view_menu #close_button {
+        background-image: url("../img/button_close_16.png"); }
+      #article_view #article_view_dialog #article_view_menu #left_column_button {
+        background-image: url("../img/button_left_column_16.png"); }
+      #article_view #article_view_dialog #article_view_menu #right_column_button {
+        background-image: url("../img/button_right_column_16.png"); }
+      #article_view #article_view_dialog #article_view_menu #full_screen_button {
+        background-image: url("../img/button_full_screen_16.png"); }
+      #article_view #article_view_dialog #article_view_menu #text_style_button {
+        background-image: url("../img/button_text_style_16.png"); }
+      #article_view #article_view_dialog #article_view_menu #text_style_menu {
+        font-family: Sans-serif;
+        font-size: 13px;
+        line-height: 26px;
+        text-align: center;
+        position: fixed;
+        bottom: 71px;
+        right: 133px;
+        background-color: #515151;
+        cursor: default; }
+        #article_view #article_view_dialog #article_view_menu #text_style_menu .down_arrow {
+          width: 0;
+          height: 0;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid #515151;
+          margin: 0 auto;
+          position: relative;
+          top: 10px; }
+        #article_view #article_view_dialog #article_view_menu #text_style_menu .text_style_menu_section {
+          margin: 6.5px; }
+          #article_view #article_view_dialog #article_view_menu #text_style_menu .text_style_menu_section > span {
+            display: inline-block;
+            padding: 0 13px;
+            margin-bottom: 1px;
+            color: white; }
+            #article_view #article_view_dialog #article_view_menu #text_style_menu .text_style_menu_section > span.control_button:hover {
+              cursor: pointer;
+              background-color: #2a2a2a; }
+            #article_view #article_view_dialog #article_view_menu #text_style_menu .text_style_menu_section > span.control_button:active {
+              background-color: #111111; }
+          #article_view #article_view_dialog #article_view_menu #text_style_menu .text_style_menu_section .control_label {
+            color: #c4c4c4;
+            font-size: 12px; }
+          #article_view #article_view_dialog #article_view_menu #text_style_menu .text_style_menu_section:nth-last-child(2) {
+            margin-bottom: -3.5px; }
+        #article_view #article_view_dialog #article_view_menu #text_style_menu #font_size_setting #current_font_size {
+          color: #c4c4c4; }
+        #article_view #article_view_dialog #article_view_menu #text_style_menu #font_size_setting #decrease_font_size_button,
+        #article_view #article_view_dialog #article_view_menu #text_style_menu #font_size_setting #increase_font_size_button {
+          font-size: 17px; }
+    #article_view #article_view_dialog #article {
+      margin-right: 2rem; }
+      #article_view #article_view_dialog #article #article_title {
+        margin-bottom: 1.5rem; }
+        #article_view #article_view_dialog #article #article_title h1 {
+          color: black;
+          font-size: 2rem;
+          margin-bottom: 1rem;
+          border-left: 0.66667rem solid black;
+          padding-left: 0.66667rem; }
+          #article_view #article_view_dialog #article #article_title h1 * {
+            color: black; }
+          #article_view #article_view_dialog #article #article_title h1 span {
+            padding-right: 1rem; }
+        #article_view #article_view_dialog #article #article_title h2 {
+          color: #636363;
+          font-weight: normal; }
+          #article_view #article_view_dialog #article #article_title h2 * {
+            color: #636363;
+            font-weight: normal; }
+    #article_view #article_view_dialog * {
+      margin: 0;
+      padding: 0;
+      border: none; }
+    #article_view #article_view_dialog a {
+      color: steelblue;
+      text-decoration: none; }
+      #article_view #article_view_dialog a * {
+        color: steelblue; }
+    #article_view #article_view_dialog img {
+      display: block;
+      margin: 0 auto;
+      max-width: 90%;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #e5e5e5; }
+    #article_view #article_view_dialog figure {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #e5e5e5; }
+      #article_view #article_view_dialog figure img {
+        max-width: 100%;
+        margin-bottom: 0;
+        padding: 0;
+        background-color: none; }
+      #article_view #article_view_dialog figure figcaption {
+        margin-top: 1rem; }
+    #article_view #article_view_dialog aside {
+      background-color: #e5e5e5;
+      padding: 1rem;
+      margin-bottom: 1.5rem; }
+      #article_view #article_view_dialog aside > *:last-child {
+        margin-bottom: 0; }
+    #article_view #article_view_dialog p, #article_view #article_view_dialog h1, #article_view #article_view_dialog h2, #article_view #article_view_dialog h3, #article_view #article_view_dialog h4, #article_view #article_view_dialog h5, #article_view #article_view_dialog h6 {
+      margin-bottom: 1.5rem; }
+    #article_view #article_view_dialog h1 {
+      font-weight: bold;
+      font-size: 1.5rem;
+      line-height: 2.25rem; }
+    #article_view #article_view_dialog h2 {
+      font-size: 1.3rem; }
+    #article_view #article_view_dialog h3 {
+      font-size: 1.1rem; }
+    #article_view #article_view_dialog table {
+      border-collapse: collapse;
+      border: 1px solid #e5e5e5;
+      margin: 1.5rem auto; }
+      #article_view #article_view_dialog table th {
+        border: 1px solid #e5e5e5;
+        padding: 0.5rem; }
+        #article_view #article_view_dialog table th > td {
+          padding: 0; }
+      #article_view #article_view_dialog table td {
+        border: 1px solid #e5e5e5;
+        padding: 0.5rem; }
+    #article_view #article_view_dialog ul, #article_view #article_view_dialog ol {
+      margin-bottom: 1rem; }
