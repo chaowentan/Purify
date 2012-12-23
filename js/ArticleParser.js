@@ -1,14 +1,3 @@
-
-// TODO: On some news sites, the first paragraph of the article is located in a
-//       different container than the rest of the article.
-
-// TODO: Support multi-page article.
-//       Consider using Opera's fast-forward standard:
-//          <link rel="next" href="next_page.html">
-
-// TODO: Parse the author's info.
-// TODO: Parse the secondary title.
-
 (function()
 {
    "use strict";
@@ -291,7 +280,7 @@
 
    ArticleParser.prototype._sanitizeElementAndDesendants = function( element )
    {
-      var eElement = ( element instanceof jQuery ) ? element[0] : element;
+      var eElement = ( element instanceof $ ) ? element[0] : element;
 
       if( eElement )
       {

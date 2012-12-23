@@ -1,7 +1,6 @@
 {
-   "predef" : [ "$",
-                "jQuery",
-                "chrome",
+   "predef" : [ "chrome",
+                "$",
                 "ArticleView",
                 "ArticleParser",
                 "Util" ],

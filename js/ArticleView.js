@@ -1,7 +1,3 @@
-
-// TODO: Allow the user to customize the color of the article view.
-// TODO: Allow the users to report bugs and request features.
-
 (function()
 {
    "use strict";
