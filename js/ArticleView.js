@@ -10,9 +10,9 @@
 
    window.ArticleView = function()
    {
-      if( !ArticleView.prototype._articleViewInstance )
+      if( !ArticleView.prototype._instance )
       {
-         ArticleView.prototype._articleViewInstance = this;
+         ArticleView.prototype._instance = this;
 
          this._createView();
 
@@ -22,7 +22,7 @@
          this.$frame.contents().find("body").append( this.$view );
       }
 
-      return ArticleView.prototype._articleViewInstance;
+      return ArticleView.prototype._instance;
    };
 
 

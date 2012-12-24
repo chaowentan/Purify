@@ -220,6 +220,9 @@
 
          var $contentContainerClone = $contentContainer.clone();
 
+         this._restoreSeparatedParagraphs( $contentContainer,
+                                           $contentContainerClone );
+
          var listOfExistingElements = [ $contentContainer[0] ];
          var listOfClonedElements = [ $contentContainerClone[0] ];
 
@@ -238,20 +241,78 @@
                var isRemoved = this._sanitizeElement( eClonedElement );
                if( !isRemoved )
                {
-                  for( var i = 0; i < eClonedElement.childNodes.length; i++ )
+                  if( eClonedElement.childNodes.length ===
+                      eExistingElement.childNodes.length )
                   {
-                     listOfExistingElements.push( eExistingElement.childNodes[i] );
-                     listOfClonedElements.push( eClonedElement.childNodes[i] );
+                     for( var i = 0; i < eClonedElement.childNodes.length; i++ )
+                     {
+                        listOfExistingElements.push( eExistingElement.childNodes[i] );
+                        listOfClonedElements.push( eClonedElement.childNodes[i] );
+                     }
                   }
                }
             }
          }
+
+         // Use appendChild() instead of $.append() to add the content instead
+         // to prevent runtime errors.
 
          $result = $("<div></div>");
          $result[0].appendChild( $contentContainerClone[0] );
       }
 
       return $result;
+   };
+
+
+
+   ////////////////////////////////////////////////////////////////////////////
+
+   ArticleParser.prototype._restoreSeparatedParagraphs = function( $contentContainer,
+                                                                   $contentContainerClone )
+   {
+      // Handle the special cases where the article content is split into
+      // two separate containers.
+
+      var isSplitIntoTwoContainers = false;
+      var listOfContainers = [ $contentContainer, $contentContainer.parent() ];
+
+      for( var i = 0; i < listOfContainers.length && !isSplitIntoTwoContainers; i++ )
+      {
+         var $container = listOfContainers[i];
+         var sClassAttr = $container.attr( "class" );
+         var listOfClassNames = sClassAttr ? sClassAttr.split( " " ) : [];
+
+         for( var j = 0; j < listOfClassNames.length && !isSplitIntoTwoContainers; j++ )
+         {
+            var sClassName = listOfClassNames[j];
+
+            if(    Util.hasSubstringCaseInsensitive( sClassName, "article" )
+                && Util.hasSubstringCaseInsensitive( sClassName, "body" ) )
+            {
+               var $splitContentContainer = $container.siblings( "." + sClassName );
+               var $separatedParagraphs = $splitContentContainer.find( "p" );
+
+               if(    $splitContentContainer.length === 1
+                   && $separatedParagraphs.length > 0 )
+               {
+                  isSplitIntoTwoContainers = true;
+
+                  $separatedParagraphs.each( function( iIndex, eParagraph )
+                  {
+                     var $clonedParagraph = $(eParagraph).clone();
+                     $contentContainerClone.prepend( $clonedParagraph );
+
+                     // Need to make sure the original content container has
+                     // the same number of elements as the clone.
+                     var $clonedParagraph2 = $(eParagraph).clone();
+                     $clonedParagraph2.css( "display", "none" );
+                     $contentContainer.prepend( $clonedParagraph2 );
+                  });
+               }
+            }
+         }
+      }
    };
 
 

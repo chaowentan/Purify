@@ -37,6 +37,18 @@
 
 
 
+   ////////////////////////////////////////////////////////////////////////////
+
+   Util.hasSubstringCaseInsensitive = function( string, substring )
+   {
+      var stringCopy = string.toLowerCase();
+      var substringCopy = substring.toLowerCase();
+
+      return ( stringCopy.indexOf( substringCopy ) !== -1 );
+   }
+
+
+
 })();
 
 

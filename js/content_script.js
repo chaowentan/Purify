@@ -10,7 +10,12 @@
       }
    });
 
-})();
+   // // Auto-start
+   // $(document).ready( function()
+   // {
+   //    (new ArticleView()).activate();
+   // })
 
+})();
 
 
