@@ -2,11 +2,11 @@
 {
    "name": "Purify",
 
+   "description": "Read news articles with minimal distraction and scrolling.",
+
    "version": "0.1",
 
    "manifest_version": 2,
-
-   "description": "Make new articles more readable on large screens by using multi-column layout.",
 
    "background":
    {
@@ -37,7 +37,7 @@
    {
        "16": "img/icon16.png",
        "48": "img/icon48.png",
-      "128": "img/icon128.png"
+      "128": "icon_128.png"
    },
 
    "browser_action" :

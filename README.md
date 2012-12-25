@@ -1,4 +1,4 @@
 Purify
 ======
 
-A chrome extension that provides a pure reading experience.
+A chrome extension that helps you read news articles with minimal distraction and scrolling.
