@@ -10,7 +10,7 @@ Whenever you find an interesting news article, try using the Purify chrome exten
 
 ### Installation
 
-To install the extension, please visit the [Chrome Web Store](https://chrome.google.com/webstore/category/home).
+To install the extension, please visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/purify/kjiappjpfpaekdfeioanaphpihpojemc).
 
 ### Feedback
 
