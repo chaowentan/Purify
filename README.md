@@ -1,7 +1,12 @@
 Purify
 ======
 
-A chrome extension that helps you read news articles with minimal distraction and scrolling.
+**Read news articles with minimal distraction and scrolling.**
+
+Whenever you find an interesting news article, try using the Purify chrome extension to convert it into a minimalistic view that 
+- Only displays the content of the article & hides all the distractions, and
+-	Utilizes all the available screen space to minimize scrolling.
+
 
 ### Installation
 
