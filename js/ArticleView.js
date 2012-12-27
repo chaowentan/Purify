@@ -97,6 +97,7 @@
                   "<span class='button' id='close_button'></span>" +
                   "<span class='button' id='right_column_button'></span>" +
                   "<span class='button' id='left_column_button'></span>" +
+                  "<span class='button' id='help_button'></span>" +
                   "<span class='button' id='full_screen_button'></span>" +
 
                   "<span class='button' id='text_style_button'></span>" +
@@ -200,6 +201,7 @@
       var $closeButton            = $menu.find( "#close_button"        );
       var $rightColButton         = $menu.find( "#right_column_button" );
       var $leftColButton          = $menu.find( "#left_column_button"  );
+      var $helpButton             = $menu.find( "#help_button"         );
       var $fullScrButton          = $menu.find( "#full_screen_button"  );
       var $textStyleButton        = $menu.find( "#text_style_button"   );
 
@@ -216,15 +218,17 @@
                $leftColButton.click( function() { self._moveColumnTowardRight();            } );
                $fullScrButton.click( function() { self.$frame[0].webkitRequestFullScreen(); } );
 
-      $increaseFontSizeButton.click( function() { self._increaseFontSize();                 } );
-      $decreaseFontSizeButton.click( function() { self._decreaseFontSize();                 } );
+                  $helpButton.click( function() { window.open( "https://github.com/chaowentan/Purify" ); } );
 
-             $sansSerifButton.click( function() { self._setSansSerifFont();                 } );
-                 $serifButton.click( function() { self._setSerifFont();                     } );
+      $increaseFontSizeButton.click( function() { self._increaseFontSize(); } );
+      $decreaseFontSizeButton.click( function() { self._decreaseFontSize(); } );
+
+             $sansSerifButton.click( function() { self._setSansSerifFont(); } );
+                 $serifButton.click( function() { self._setSerifFont();     } );
 
       // Add keyboard shortcuts.
 
-      var LEFT_ARROW_KEY = 37;
+      var  LEFT_ARROW_KEY = 37;
       var RIGHT_ARROW_KEY = 39;
 
       $(document).keydown( function(e)

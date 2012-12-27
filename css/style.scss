@@ -154,6 +154,7 @@ html
                 #close_button { background-image: url( "../img/button_close_16.png" ); }
           #left_column_button { background-image: url( "../img/button_left_column_16.png" ); }
          #right_column_button { background-image: url( "../img/button_right_column_16.png" ); }
+                 #help_button { background-image: url( "../img/button_help_16.png" ); }
           #full_screen_button { background-image: url( "../img/button_full_screen_16.png" ); }
            #text_style_button { background-image: url( "../img/button_text_style_16.png" ); }
 
@@ -169,7 +170,7 @@ html
 
             position: fixed;
             bottom: $dialogMargin + 51px;
-            right: $dialogMargin + 113px;
+            right: $dialogMargin + 155px;
             background-color: $menuBgColor;
 
             cursor: default;

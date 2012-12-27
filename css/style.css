@@ -67,6 +67,8 @@ html {
         background-image: url("../img/button_left_column_16.png"); }
       #article_view #article_view_dialog #article_view_menu #right_column_button {
         background-image: url("../img/button_right_column_16.png"); }
+      #article_view #article_view_dialog #article_view_menu #help_button {
+        background-image: url("../img/button_help_16.png"); }
       #article_view #article_view_dialog #article_view_menu #full_screen_button {
         background-image: url("../img/button_full_screen_16.png"); }
       #article_view #article_view_dialog #article_view_menu #text_style_button {
@@ -78,7 +80,7 @@ html {
         text-align: center;
         position: fixed;
         bottom: 71px;
-        right: 133px;
+        right: 175px;
         background-color: #515151;
         cursor: default; }
         #article_view #article_view_dialog #article_view_menu #text_style_menu .down_arrow {
