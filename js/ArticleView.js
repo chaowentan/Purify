@@ -66,9 +66,12 @@
             "</body>" +
          "</html>";
 
-      $frame[0].contentWindow.document.open();
-      $frame[0].contentWindow.document.write( sFrameContent );
-      $frame[0].contentWindow.document.close();
+      var eFrameDocument = $frame[0].contentWindow ? $frame[0].contentWindow.document
+                                                   : $frame[0].contentDocument;
+
+      eFrameDocument.open();
+      eFrameDocument.write( sFrameContent );
+      eFrameDocument.close();
 
       return $frame;
    };

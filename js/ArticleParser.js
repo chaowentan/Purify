@@ -42,12 +42,8 @@
 
    ////////////////////////////////////////////////////////////////////////////
 
-   ArticleParser.prototype._findContentContainer = function()
+   ArticleParser.prototype._findContainerWithTheMostParagraphs = function()
    {
-      // Almost all the news sites use <p> for the article paragraphs. If this
-      // is no longer true in the future, assume elements with the highest text
-      // density are the paragraph elements.
-
       var $paragraphs = $("p");
       var listOfParagraphContainers = [];
 
@@ -87,11 +83,36 @@
          }
       }
 
-      // If an article is not found, then just display all the text.
+      return $containerWithTheMostParagraphs;
+   };
 
-      var $contentContainer = $containerWithTheMostParagraphs;
+
+
+   ////////////////////////////////////////////////////////////////////////////
+
+   ArticleParser.prototype._findContentContainer = function()
+   {
+      // Almost all the news sites use <p> for the article paragraphs. But
+      // there are some unusual exceptions.
+      // TODO: Find a generic way to parse this.
+
+      var $contentContainer = $();
+
+      var listOfUnusualContentContainerSelectors = [ ".post-body" ];
+      listOfUnusualContentContainerSelectors.some( function( sSelector )
+      {
+         $contentContainer = $( sSelector );
+         return ( $contentContainer.length > 0 );
+      });
+
       if( $contentContainer.length === 0 )
       {
+         $contentContainer = this._findContainerWithTheMostParagraphs();
+      }
+
+      if( $contentContainer.length === 0 )
+      {
+         // If an article is not found, then just display all the text.
          $contentContainer = $( "<div></div" );
          $contentContainer.html( document.body.innerText.replace( /\n/g, "<br/>") );
       }
@@ -155,6 +176,46 @@
    };
 
 
+   ////////////////////////////////////////////////////////////////////////////
+
+   ArticleParser.prototype._getHeadingElementClosestToContainer = function( eContentContainer )
+   {
+      // Find the heading elment that's closest to the content container.
+
+      var $title = $()
+
+      var listOfHeadingElementTags = [ "h1", "h2", "h3" ];
+      var listOfHeadingElements = [];
+
+      for( var i = 0;
+              i < listOfHeadingElementTags.length
+           && listOfHeadingElements.length === 0;
+           i++ )
+      {
+         listOfHeadingElements = $.makeArray( $( listOfHeadingElementTags[i] ) );
+      }
+
+      listOfHeadingElements.sort( function( eElement1, eElement2 )
+      {
+         var iDistance1 = Util.getDistanceBetweenElements( eElement1, eContentContainer );
+         var iDistance2 = Util.getDistanceBetweenElements( eElement2, eContentContainer );
+
+         return iDistance1 - iDistance2;
+      });
+
+      var eHeadingElementClosestToContent = listOfHeadingElements[0];
+      if( eHeadingElementClosestToContent )
+      {
+         $title = $( eHeadingElementClosestToContent );
+
+         // Prevent dupolicate titles from appearing in the content.
+         $(eHeadingElementClosestToContent).addClass( _IGNORE_CLASS );
+      }
+
+      return $title;
+   }
+
+
 
    ////////////////////////////////////////////////////////////////////////////
 
@@ -163,42 +224,31 @@
       var $title = $();
       var eContentContainer = $contentContainer[0];
 
-      // Find the heading elment that's closest to the content container.
-
       if( eContentContainer )
       {
-         var listOfHeadingElementTags = [ "h1", "h2", "h3" ];
-         var listOfHeadingElements = [];
+         // Most news sites use heading elements such h1, h2, etc., for the
+         // article titles. But there are some unusual exceptions.
+         // TODO: Find a generic way to parse this.
 
-         for( var i = 0;
-                 i < listOfHeadingElementTags.length
-              && listOfHeadingElements.length === 0;
-              i++ )
+         var listOfUnusualPrimaryTitleSelectors = [ ".post-title" ];
+         listOfUnusualPrimaryTitleSelectors.some( function( sSelector )
          {
-            listOfHeadingElements = $.makeArray( $( listOfHeadingElementTags[i] ) );
-         }
-
-         listOfHeadingElements.sort( function( eElement1, eElement2 )
-         {
-            var iDistance1 = Util.getDistanceBetweenElements( eElement1, eContentContainer );
-            var iDistance2 = Util.getDistanceBetweenElements( eElement2, eContentContainer );
-
-            return iDistance1 - iDistance2;
+            $title = $( sSelector );
+            return ( $title.length > 0 );
          });
 
-         var eHeadingElementClosestToContent = listOfHeadingElements[0];
-
-         if( eHeadingElementClosestToContent )
+         if( $title.length === 0 )
          {
-            $title = $("<h1></h1>");
-            $title.html( $(eHeadingElementClosestToContent).html() );
-
-            // Prevent dupolicate titles from appearing in the content.
-            $(eHeadingElementClosestToContent).addClass( _IGNORE_CLASS );
+            $title = this._getHeadingElementClosestToContainer( eContentContainer )
          }
-         else
+
+         // For styling purposes, make sure the title is a <h1> element.
+         if(    $title.length > 0
+             && $title[0].tagName !== "H1" )
          {
-            $title = $();
+            var $h1 = $("<h1></h1>");
+            $h1.html( $title.html() );
+            $title = $h1;
          }
       }
 
